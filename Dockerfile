@@ -42,7 +42,7 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r /app/requirements.txt
 
-EXPOSE 5000
+EXPOSE 443
 
 ENV FLASK_APP ./app.py
 ENV FLASK_DEBUG 1
@@ -51,6 +51,6 @@ ENV LC_ALL=C.UTF-8 LANG=C.UTF-8
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY app.ini /app.ini
 
-HEALTHCHECK CMD curl --fail http://localhost:5000/ || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:443/ || exit 1
 
 CMD nginx && uwsgi --ini /app.ini
